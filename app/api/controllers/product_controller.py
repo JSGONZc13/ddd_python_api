@@ -47,9 +47,5 @@ def delete_product():
 
 @product_api.route("/GET_PRODUCTS", methods=["POST"])
 def get_products():
-    products = _get_products.execute()
-    return jsonify([{
-        "intId": p.id,
-        "strName": p.name,
-        "fltPrice": p.price
-    } for p in products]), 200
+    response  = _get_products.execute()
+    return jsonify(response), 200
