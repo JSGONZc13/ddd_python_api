@@ -1,6 +1,6 @@
 # app/run.py
 from flask import Flask
-from api.product_controller import product_api
+from api.controllers.product_controller import product_api
 from infrastructure.database.database import db
 def create_app():
      app = Flask(__name__)
