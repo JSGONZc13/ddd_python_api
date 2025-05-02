@@ -8,15 +8,7 @@ class ProductRepositoryImpl(ProductRepository):
         self.datasource = ProductDataSource()
 
      def save(self, product: Product) -> Product:
-          if product.id:
-               model = self.datasource.get(int(product.id))
-               if model:
-                    model.strName = product.name
-                    model.fltPrice = product.price
-               else:
-                    model = ProductModel.from_domain(product)
-          else:
-               model = ProductModel.from_domain(product)
+          model = ProductModel.from_domain(product)
           self.datasource.save(model)
           return model.to_domain()
      
