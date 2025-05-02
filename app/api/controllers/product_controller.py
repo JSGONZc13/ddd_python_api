@@ -19,31 +19,22 @@ _del_product = DelProduct()
 def create():
     data = request.get_json()
     product_ = Product(name=data["name"], price=data["price"])
-    product = _add_product.execute(product_)
-    return jsonify({
-        "id": product.id,
-        "name": product.name,
-        "price": product.price
-    }), 201
+    response = _add_product.execute(product_)
+    return jsonify(response), 200
 
 @product_api.route("/GET_PRODUCT", methods=["POST"])
 def get_product():
     data = request.get_json()
     id = data.get("id")
-    product = _get_product.execute(id)
-    if not product:
-        return jsonify({"error": "Product not found"}), 404
-    return (
-        jsonify({"id": product.id, "name": product.name, "price": product.price}),
-        200,
-    )
+    response = _get_product.execute(id)
+    return jsonify(response), 200
 
 @product_api.route("/DEL_PRODUCT", methods=["POST"])
 def delete_product():
     data = request.get_json()
     id = data.get("id")
-    _del_product.execute(id)
-    return jsonify({"message": "Product deleted"}), 200
+    response = _del_product.execute(id)
+    return jsonify(response), 200
 
 @product_api.route("/GET_PRODUCTS", methods=["POST"])
 def get_products():

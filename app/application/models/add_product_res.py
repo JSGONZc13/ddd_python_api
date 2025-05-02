@@ -1,7 +1,7 @@
 from domain.entities.product import Product
 from application.models.api_response import ApiResponse
 
-class GetProductRes(ApiResponse):
+class AddProductRes(ApiResponse):
      def __init__ (self, code: int, message: str, product: Product = None):
           super().__init__(code, message)
           self.product = self._to_dict(product) if product else None
@@ -21,14 +21,14 @@ class GetProductRes(ApiResponse):
      @staticmethod
      def from_product(product: Product):
           if not product:
-               return GetProductRes(
+               return AddProductRes(
                     code=1,
-                    message="No hay producto registrado",
+                    message="No se pudo registrar el producto",
                     product=None
                )
           
-          return GetProductRes(
+          return AddProductRes(
                code=0,
-               message="Producto obtenido correctamente",
+               message="Producto registrado correctamente",
                product=product
           )
